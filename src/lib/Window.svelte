@@ -84,7 +84,9 @@
             </button>
         </div>
     </div>
-    <h1>Hello, SvelteOS</h1>
+    <div class="window-content">
+        <h1>Hello, SvelteOS</h1>
+    </div>
 </div>
 
 <style lang="scss">
@@ -108,6 +110,10 @@
         justify-content: space-between;
         padding: 0 8px;
         user-select: none;
+    }
+
+    .window-content {
+      user-select: text;
     }
 
     .actions {
