@@ -19,7 +19,7 @@
 <div class="desktop-container">
     {#each applications as {name, component}}
         <div class="application">
-            <div class="application-icon" role="button" tabindex="0" on:dblclick={() => windowManager.open(component)}>
+            <div class="application-icon" role="button" tabindex="0" on:dblclick={() => windowManager.open(name, component)}>
                 <img src="/applications-icons/{name}.svg" alt="Icon for {name}" />
             </div>
             <span><b>{name}</b></span>

@@ -60,11 +60,11 @@ const resize = (id: UUID, position: Vector2, size: Vector2) => {
     })
 }
 
-const open = (component: ComponentType) => {
+const open = (name: string, component: ComponentType) => {
     const size = 600;
     const newWindow = {
         size: {x: size, y: size},
-        title: "Text Editor",
+        title: name,
         position: {x: window.innerWidth / 2 - size / 2, y: window.innerHeight / 2 - size / 2},
         state: WindowState.Normal,
         zIndex: maxZIndex() + 1,
