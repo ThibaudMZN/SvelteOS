@@ -1,4 +1,3 @@
-
 <textarea>Hello, SvelteOS</textarea>
 
 <style>

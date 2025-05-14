@@ -6,6 +6,7 @@
   --secondary: #732255;
   --tertiary: #B2C6D5;
   --background: #180d1b;
+  --background-with-transparency: #180d1b44;
 }
 
 html, body {

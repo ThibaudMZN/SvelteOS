@@ -14,26 +14,7 @@ export type Window = {
 }
 type Windows = Record<UUID, Window>;
 
-const defaultWindows: Windows = {
-    [crypto.randomUUID()]: {
-        size: {x: 400, y: 400},
-        title: "Text Editor",
-        position: {x: 100, y: 100},
-        state: WindowState.Normal,
-        zIndex: 1,
-        component: TextEditor
-    },
-    [crypto.randomUUID()]: {
-        size: {x: 400, y: 400},
-        title: "Text Editor",
-        position: {x: 200, y: 200},
-        state: WindowState.Normal,
-        zIndex: 2,
-        component: TextEditor
-    }
-}
-
-const {subscribe, update} = writable<Windows>(defaultWindows)
+const {subscribe, update} = writable<Windows>({})
 
 const maxZIndex = () => {
     const windows = Object.values(get(windowManager));
@@ -71,11 +52,28 @@ const move = (id: UUID, offset: Vector2) => {
     })
 }
 
+const open = (component: ComponentType) => {
+    const size = 600;
+    const newWindow = {
+        size: {x: size, y: size},
+        title: "Text Editor",
+        position: {x: window.innerWidth / 2 - size / 2, y: window.innerHeight / 2 - size / 2},
+        state: WindowState.Normal,
+        zIndex: maxZIndex() + 1,
+        component
+    }
+    update((currentValue) => {
+        currentValue[crypto.randomUUID()] = newWindow;
+        return currentValue;
+    })
+}
+
 export const windowManager = {
     bringToFront,
     close: closeWindow,
     demaximize: (id: UUID) => switchState(id, WindowState.Normal),
     maximize: (id: UUID) => switchState(id, WindowState.Maximized),
     move,
+    open,
     subscribe
 }
