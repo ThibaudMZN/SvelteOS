@@ -3,7 +3,7 @@ import type {ComponentType} from "svelte";
 
 export enum WindowState { Minimized, Maximized, Normal}
 
-type Window = {
+export type Window = {
     title: string;
     position: Vector2;
     size: Vector2;

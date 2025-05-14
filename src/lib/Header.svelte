@@ -16,6 +16,8 @@
     width: calc(100% - 2 * var(--padding));
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
     padding: 4px 8px;
+    background: #180d1b44;
   }
 </style>

@@ -1,0 +1,49 @@
+<script lang="ts">
+    import {windowManager, WindowState} from "../../stores/windowManager.store";
+    import Titlebar from "./Titlebar.svelte";
+
+    export let id: UUID;
+
+    let dragged = false;
+    let style: string = '';
+
+    $: thisWindow = $windowManager[id];
+    $: {
+        if (thisWindow) {
+            if (thisWindow.state === WindowState.Maximized) {
+                style = `transform: translate(0, 0); width: 100vw; height: 100vh; z-index: ${thisWindow.zIndex};`
+            } else {
+                style = `transform: translate(${thisWindow.position.x}px, ${thisWindow.position.y}px); width: ${thisWindow.size.x}px; height: ${thisWindow.size.y}px; z-index: ${thisWindow.zIndex};`
+            }
+        }
+    }
+</script>
+
+<div class="window" {style} class:dragged>
+    <Titlebar bind:thisWindow bind:id bind:dragged />
+    <div class="window-content">
+        <h1>Hello, SvelteOS</h1>
+    </div>
+</div>
+
+<style lang="scss">
+    .window {
+        position: absolute;
+        will-change: transform;
+        background: var(--background);
+        display: flex;
+        flex-direction: column;
+        outline: 1px solid var(--primary);
+        top: 0;
+        left: 0;
+        border-radius: 4px;
+    }
+
+    .window:not(.dragged) {
+      transition: all 0.1s ease-out;
+    }
+
+    .window-content {
+      user-select: text;
+    }
+</style>

@@ -1,18 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito&display=swap');
 
 :root {
-  --text: #000000;
+  --text: #E7F2E4;
   --primary: #E55050;
   --secondary: #732255;
   --tertiary: #B2C6D5;
-  --background: #E7F2E4;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #E7F2E4;
-    --background: #180d1b;
-  }
+  --background: #180d1b;
 }
 
 html, body {
