@@ -29,11 +29,18 @@ const defaultWindows: Windows = {
     }
 }
 
-const { subscribe, update } = writable<Windows>(defaultWindows)
+const {subscribe, update} = writable<Windows>(defaultWindows)
 
 const maxZIndex = () => {
     const windows = Object.values(get(windowManager));
     return Math.max(...windows.map(w => w.zIndex));
+}
+
+const bringToFront = (id: UUID) => {
+    update((currentValue) => {
+        currentValue[id].zIndex = maxZIndex() + 1;
+        return currentValue;
+    })
 }
 
 const closeWindow = (id: UUID) => {
@@ -46,15 +53,25 @@ const closeWindow = (id: UUID) => {
 const switchState = (id: UUID, state: WindowState) => {
     update((currentValue) => {
         currentValue[id].state = state;
-        if(state === WindowState.Maximized)
-            currentValue[id].zIndex = maxZIndex() + 1;
+        if (state === WindowState.Maximized)
+            bringToFront(id);
+        return currentValue;
+    })
+}
+
+const move = (id: UUID, offset: Vector2) => {
+    update((currentValue) => {
+        currentValue[id].position.x += offset.x;
+        currentValue[id].position.y += offset.y;
         return currentValue;
     })
 }
 
 export const windowManager = {
+    bringToFront,
     close: closeWindow,
     demaximize: (id: UUID) => switchState(id, WindowState.Normal),
     maximize: (id: UUID) => switchState(id, WindowState.Maximized),
+    move,
     subscribe
 }
