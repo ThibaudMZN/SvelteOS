@@ -1,9 +1,11 @@
 <script lang="ts">
     import {windowManager} from "./stores/windowManager.store";
     import Window from "./lib/Window.svelte";
+    import Header from "./lib/Header.svelte";
 </script>
 
 <main class="desktop">
+    <Header />
     {#each Object.entries($windowManager) as [id, window] (id)}
         <Window {id}/>
     {/each}

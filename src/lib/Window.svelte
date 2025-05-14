@@ -94,7 +94,7 @@
         background: var(--background);
         display: flex;
         flex-direction: column;
-        border: 1px solid var(--primary);
+        outline: 1px solid var(--primary);
         top: 0;
         left: 0;
         border-radius: 4px;
@@ -102,7 +102,6 @@
 
     .titlebar {
         height: 32px;
-        color: var(--background);
         background: var(--primary);
         display: flex;
         align-items: center;

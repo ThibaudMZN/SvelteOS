@@ -8,10 +8,18 @@
   --background: #E7F2E4;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #E7F2E4;
+    --background: #180d1b;
+  }
+}
+
 html, body {
   margin: 0;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  color: var(--text);
 }
