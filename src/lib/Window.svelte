@@ -67,7 +67,7 @@
     });
 </script>
 
-<div class="window" {style}>
+<div class="window" {style} class:dragged>
     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <div
             class="titlebar"
@@ -100,6 +100,10 @@
         top: 0;
         left: 0;
         border-radius: 4px;
+    }
+
+    .window:not(.dragged) {
+      transition: all 0.1s ease-out;
     }
 
     .titlebar {
