@@ -1,4 +1,4 @@
-import {writable, get} from 'svelte/store';
+import {writable, get, derived} from 'svelte/store';
 import type {ComponentType} from "svelte";
 import TextEditor from "../lib/applications/TextEditor.svelte";
 
@@ -86,3 +86,8 @@ export const windowManager = {
     resize,
     subscribe
 }
+
+export const focusedWindow = derived<[typeof windowManager], Window | undefined>([windowManager], ([$windowManager]) => {
+    const sortedWindows = Object.values($windowManager).sort((a, b) => b.zIndex - a.zIndex);
+    return sortedWindows.length ? sortedWindows[0] : undefined
+});

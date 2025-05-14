@@ -35,7 +35,7 @@
         flex-direction: row;
         gap: 32px;
         flex-wrap: wrap;
-        padding: 32px;
+        padding: 48px;
     }
 
     .application {
