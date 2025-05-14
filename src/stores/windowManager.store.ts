@@ -1,5 +1,6 @@
 import {writable, get} from 'svelte/store';
 import type {ComponentType} from "svelte";
+import TextEditor from "../lib/applications/TextEditor.svelte";
 
 export enum WindowState { Minimized, Maximized, Normal}
 
@@ -9,23 +10,26 @@ export type Window = {
     size: Vector2;
     zIndex: number;
     state: WindowState;
+    component: ComponentType;
 }
 type Windows = Record<UUID, Window>;
 
 const defaultWindows: Windows = {
     [crypto.randomUUID()]: {
         size: {x: 400, y: 400},
-        title: "My first window",
+        title: "Text Editor",
         position: {x: 100, y: 100},
         state: WindowState.Normal,
-        zIndex: 1
+        zIndex: 1,
+        component: TextEditor
     },
     [crypto.randomUUID()]: {
         size: {x: 400, y: 400},
-        title: "My second window",
+        title: "Text Editor",
         position: {x: 200, y: 200},
         state: WindowState.Normal,
-        zIndex: 2
+        zIndex: 2,
+        component: TextEditor
     }
 }
 

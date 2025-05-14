@@ -22,7 +22,7 @@
 <div class="window" {style} class:dragged>
     <Titlebar bind:thisWindow bind:id bind:dragged />
     <div class="window-content">
-        <h1>Hello, SvelteOS</h1>
+        <svelte:component this={thisWindow.component} />
     </div>
 </div>
 
@@ -45,5 +45,7 @@
 
     .window-content {
       user-select: text;
+      width: 100%;
+      height: 100%;
     }
 </style>
