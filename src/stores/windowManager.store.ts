@@ -18,7 +18,7 @@ const {subscribe, update} = writable<Windows>({})
 
 const maxZIndex = () => {
     const windows = Object.values(get(windowManager));
-    return Math.max(...windows.map(w => w.zIndex));
+    return Math.max(...windows.map(w => w.zIndex), 0);
 }
 
 const bringToFront = (id: UUID) => {
@@ -52,6 +52,14 @@ const move = (id: UUID, offset: Vector2) => {
     })
 }
 
+const resize = (id: UUID, position: Vector2, size: Vector2) => {
+    update((currentValue) => {
+        currentValue[id].position = position;
+        currentValue[id].size = size;
+        return currentValue;
+    })
+}
+
 const open = (component: ComponentType) => {
     const size = 600;
     const newWindow = {
@@ -75,5 +83,6 @@ export const windowManager = {
     maximize: (id: UUID) => switchState(id, WindowState.Maximized),
     move,
     open,
+    resize,
     subscribe
 }

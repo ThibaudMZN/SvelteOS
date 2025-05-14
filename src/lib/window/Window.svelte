@@ -1,10 +1,12 @@
 <script lang="ts">
     import {windowManager, WindowState} from "../../stores/windowManager.store";
     import Titlebar from "./Titlebar.svelte";
+    import ResizeAnchors from "./ResizeAnchors.svelte";
 
     export let id: UUID;
 
     let dragged = false;
+    let resized = false;
     let style: string = '';
 
     $: thisWindow = $windowManager[id];
@@ -19,11 +21,12 @@
     }
 </script>
 
-<div class="window" {style} class:dragged>
+<div class="window" {style} class:moving={dragged || resized} on:focusin={() => windowManager.bringToFront(id)}>
     <Titlebar bind:thisWindow bind:id bind:dragged />
     <div class="window-content">
         <svelte:component this={thisWindow.component} />
     </div>
+    <ResizeAnchors bind:thisWindow bind:id bind:resized />
 </div>
 
 <style lang="scss">
@@ -39,7 +42,7 @@
         border-radius: 4px;
     }
 
-    .window:not(.dragged) {
+    .window:not(.moving) {
       transition: all 0.1s ease-out;
     }
 
